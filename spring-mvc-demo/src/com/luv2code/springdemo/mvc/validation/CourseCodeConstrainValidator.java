@@ -1,5 +1,7 @@
 package com.luv2code.springdemo.mvc.validation;
 
+import java.util.Optional;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
@@ -14,7 +16,7 @@ public class CourseCodeConstrainValidator implements ConstraintValidator<CourseC
 
 	@Override
 	public boolean isValid(String theCode, ConstraintValidatorContext theConstraintValidatorContext) {
-		return theCode != null ? theCode.startsWith(coursePrefix) : true;
+		return Optional.ofNullable(theCode).map(code -> code.startsWith(coursePrefix)).orElse(true);
 	}
 
 }
