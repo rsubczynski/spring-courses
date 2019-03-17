@@ -1,4 +1,4 @@
-package com.luv2code.springdemo.mvc;
+package com.luv2code.springdemo.mvc.model;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
