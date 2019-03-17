@@ -16,6 +16,9 @@
 
 	<br>
 	<br> Postal code : ${costumer.postalCode}
+
+	<br>
+	<br> Course code : ${costumer.courseCode}
 </body>
 
 

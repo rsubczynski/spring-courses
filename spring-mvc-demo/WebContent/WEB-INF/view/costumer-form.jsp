@@ -7,7 +7,9 @@
 <title>Costumer Registration Form</title>
 
 <style>
-	.error{color: red}
+.error {
+	color: red
+}
 </style>
 </head>
 <body>
@@ -33,6 +35,12 @@
 		
 		Postal code:(*) : <form:input path="postalCode" />
 		<form:errors path="postalCode" cssClass="error" />
+
+		<br>
+		<br>
+		
+		Curse code:(*) : <form:input path="courseCode" />
+		<form:errors path="courseCode" cssClass="error" />
 
 		<br>
 		<br>
