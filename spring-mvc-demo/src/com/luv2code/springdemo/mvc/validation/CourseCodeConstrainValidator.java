@@ -3,7 +3,7 @@ package com.luv2code.springdemo.mvc.validation;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class CourseCodeConstranintValidator implements ConstraintValidator<CourseCode, String> {
+public class CourseCodeConstrainValidator implements ConstraintValidator<CourseCode, String> {
 
 	private String coursePrefix;
 
