@@ -18,18 +18,20 @@ public class UpdateStudentDemo {
 		Session session = factory.getCurrentSession();
 
 		try {
-			// create a student object
-			System.out.println("Creating new student object...");
-			Student tempStudent = new Student("Radek", "Subcz", "costam@gmail.com");
+			int studentId = 1;
 
-			// start a transaction
 			session.beginTransaction();
 
-			// save the student object
-			System.out.println("Saving the student... " + tempStudent);
-			session.save(tempStudent);
+			Student myStudent = session.get(Student.class, studentId);
+			System.out.println("Updating student");
+			myStudent.setFirstName("Scooby");
 
-			// commit transaction
+			session.getTransaction().commit();
+
+			session = factory.getCurrentSession();
+			session.beginTransaction();
+
+			session.createQuery("update Student set email='foo.gmail.com'").executeUpdate();
 			session.getTransaction().commit();
 
 			System.out.println("Done");
