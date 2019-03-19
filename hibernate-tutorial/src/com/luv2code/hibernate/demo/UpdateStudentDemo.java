@@ -6,7 +6,7 @@ import org.hibernate.cfg.Configuration;
 
 import com.luv2code.hibernate.demo.entity.Student;
 
-public class CreateStudentDemo {
+public class UpdateStudentDemo {
 
 	public static void main(String[] args) {
 
@@ -18,20 +18,18 @@ public class CreateStudentDemo {
 		Session session = factory.getCurrentSession();
 
 		try {
-			int studentId = 1;
+			// create a student object
+			System.out.println("Creating new student object...");
+			Student tempStudent = new Student("Radek", "Subcz", "costam@gmail.com");
 
+			// start a transaction
 			session.beginTransaction();
 
-			Student myStudent = session.get(Student.class, studentId);
-			System.out.println("Updating student");
-			myStudent.setFirstName("Scooby");
+			// save the student object
+			System.out.println("Saving the student... " + tempStudent);
+			session.save(tempStudent);
 
-			session.getTransaction().commit();
-
-			session = factory.getCurrentSession();
-			session.beginTransaction();
-
-			session.createQuery("update Student set email='foo.gmail.com'").executeUpdate();
+			// commit transaction
 			session.getTransaction().commit();
 
 			System.out.println("Done");
