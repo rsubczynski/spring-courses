@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import net.bytebuddy.build.ToStringPlugin.Enhance.Prefix;
+
 @Entity
 @Table(name = "instructor_detail")
 public class InscructorDetails {
@@ -32,7 +34,8 @@ public class InscructorDetails {
 	@Column(name = "hobby")
 	private String hobby;
 
-	@OneToOne(mappedBy = "inscructorDetails", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "inscructorDetails", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+			CascadeType.REFRESH })
 	private Instructor instructor;
 
 	public int getId() {
