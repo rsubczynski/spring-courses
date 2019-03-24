@@ -4,7 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import com.luv2code.hibernate.demo.entity.InscructorDetails;
+import com.luv2code.hibernate.demo.entity.InstructorDetail;
 import com.luv2code.hibernate.demo.entity.Instructor;
 
 public class GetInstructorDetailsDemo {
@@ -13,7 +13,7 @@ public class GetInstructorDetailsDemo {
 
 		// create session factory
 		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Instructor.class)
-				.addAnnotatedClass(InscructorDetails.class).buildSessionFactory();
+				.addAnnotatedClass(InstructorDetail.class).buildSessionFactory();
 
 		// create session
 		Session session = factory.getCurrentSession();
@@ -24,7 +24,7 @@ public class GetInstructorDetailsDemo {
 
 			// get the instructor details object
 			int theId = 2;
-			InscructorDetails tempInscructorDetails = session.get(InscructorDetails.class, theId);
+			InstructorDetail tempInscructorDetails = session.get(InstructorDetail.class, theId);
 			// print the instructor detail
 			System.out.println("tempInscructorDetails: " + tempInscructorDetails);
 			// print the associated instructor

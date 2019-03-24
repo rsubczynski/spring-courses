@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import com.luv2code.hibernate.demo.entity.InscructorDetails;
+import com.luv2code.hibernate.demo.entity.InstructorDetail;
 import com.luv2code.hibernate.demo.entity.Instructor;
 import com.luv2code.hibernate.demo.entity.Student;
 
@@ -16,7 +16,7 @@ public class DeleteDemo {
 
 		// create session factory
 		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Instructor.class)
-				.addAnnotatedClass(InscructorDetails.class).buildSessionFactory();
+				.addAnnotatedClass(InstructorDetail.class).buildSessionFactory();
 
 		// create session
 		Session session = factory.getCurrentSession();
