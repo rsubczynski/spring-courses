@@ -1,6 +1,7 @@
 package com.luv2code.aopdemo.aspect;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -10,7 +11,6 @@ import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -21,14 +21,16 @@ import com.luv2code.aopdemo.Account;
 @Component
 @Order(2)
 public class MyDemoLoggingAspect {
+	
+	private static Logger myLogger = Logger.getLogger(MyDemoLoggingAspect.class.getName());
 
 	@Before("com.luv2code.aopdemo.aspect.LuvAopExpressions.forDaoPackageNoGetterSetter()")
 	public void beforeAddAccountAdvice(JoinPoint theJoinpoint) {
-		System.out.println("\n========>>> Executing @Before advice on method");
+		myLogger.info("\n========>>> Executing @Before advice on method");
 
 		// display the method signature
 		MethodSignature methodSig = (MethodSignature) theJoinpoint.getSignature();
-		System.out.println("Method: " + methodSig);
+		myLogger.info("Method: " + methodSig);
 
 		// display method arguments
 
@@ -37,11 +39,11 @@ public class MyDemoLoggingAspect {
 
 		// loop thru agrs
 		for (Object tempArgs : args) {
-			System.out.println(tempArgs);
+			myLogger.info(tempArgs.toString());
 			if (tempArgs instanceof Account) {
 				Account theAccount = (Account) tempArgs;
-				System.out.println("account name: " + theAccount.getName());
-				System.out.println("account level: " + theAccount.getLevel());
+				myLogger.info("account name: " + theAccount.getName());
+				myLogger.info("account level: " + theAccount.getLevel());
 
 			}
 		}
@@ -52,35 +54,35 @@ public class MyDemoLoggingAspect {
 	public void afterReturningFindAccountsAdvice(JoinPoint theJoinPoint, List<Account> result) {
 		String method = theJoinPoint.getSignature().toShortString();
 
-		System.out.println("\n=====> Executing @AfterReturning on method: " + method);
+		myLogger.info("\n=====> Executing @AfterReturning on method: " + method);
 
-		System.out.println("\n=====> Executing result is: " + result);
+		myLogger.info("\n=====> Executing result is: " + result);
 
 		convertAccountToUpperCase(result);
 
-		System.out.println("\n=====> Executing result is: " + result);
+		myLogger.info("\n=====> Executing result is: " + result);
 	}
 
 	@AfterThrowing(pointcut = "execution(* com.luv2code.aopdemo.dao.AccountDAO.findAccounts(..))", throwing = "theExc")
 	public void afterThrowingFindAccountAdvice(JoinPoint theJoinpoint, Throwable theExc) {
 
 		String method = theJoinpoint.getSignature().toShortString();
-		System.out.println("\n=====> Executing @AfterThrowing on method: " + method);
-		System.out.println("\n=====> The exception is: " + theExc);
+		myLogger.info("\n=====> Executing @AfterThrowing on method: " + method);
+		myLogger.info("\n=====> The exception is: " + theExc);
 
 	}
 
 	@After("execution(* com.luv2code.aopdemo.dao.AccountDAO.findAccounts(..))")
 	public void afterFindAccountAdvice(JoinPoint theJoinpoint) {
 		String method = theJoinpoint.getSignature().toShortString();
-		System.out.println("\n=====> Executing @After on method: " + method);
+		myLogger.info("\n=====> Executing @After on method: " + method);
 	}
 
 	@Around("execution(* com.luv2code.aopdemo.service.*.getFortune(..))")
 	public Object aroundGetFortune(ProceedingJoinPoint theProceedingJoinPoint) throws Throwable {
 
 		String method = theProceedingJoinPoint.getSignature().toShortString();
-		System.out.println("\n=====> Executing @Around on method: " + method);
+		myLogger.info("\n=====> Executing @Around on method: " + method);
 		
 		
 		long begin = System.currentTimeMillis();
@@ -91,7 +93,7 @@ public class MyDemoLoggingAspect {
 		
 		long duration = end - begin;
 		
-		System.out.println("\n====> Dutation: " + duration / 1000.0 + "");
+		myLogger.info("\n====> Dutation: " + duration / 1000.0 + "");
 		return result;
 	}
 
