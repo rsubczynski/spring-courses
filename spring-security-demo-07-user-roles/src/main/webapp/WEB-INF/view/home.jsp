@@ -49,7 +49,7 @@
 	</security:authorize>
 	
 	<hr>
-	
+	 
 	
 	<!-- Add a logout button -->
 	<form:form action="${pageContext.request.contextPath}/logout" 
