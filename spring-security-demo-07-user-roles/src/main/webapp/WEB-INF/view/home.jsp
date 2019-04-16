@@ -27,7 +27,7 @@
 	
 	<security:authorize access="hasRole('MANAGER')">
 	
-		<!-- Add a link to point to /leaders ... this is for the managers -->
+		<!-- Add a link to poin t to /leaders ... this is for the managers -->
 		
 		<p>
 			<a href="${pageContext.request.contextPath}/leaders">Leadership Meeting</a>
